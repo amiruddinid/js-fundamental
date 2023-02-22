@@ -11,7 +11,7 @@ const kosong = null
 // 5. Undefined - variable dengan nilai yang belum terdefiniskan
 let undef
 
-// non-primitif : satu variable bisa berisi banyak data
+// non-primitif : tipe data yang bisa berisi banyak data
 // 1. Object -> untuk menyimpan nilai yang bersifat deskriptif
 const avanza = {
     plat: 'B 1234 FSW',
@@ -46,4 +46,42 @@ console.log(cars[3]) //Creta
 cars[0] = 'Yaris'
 console.log(cars[0]) //Yaris
 
-// kita bisa melakukan penghapusan data, filter, search, sort di array
+// kita bisa melakukan penghapusan data, filter, search, sort, penambahan data di array
+
+const computer = {
+    processor: 'Intel',
+    ram: '16gb',
+    bluetooth: true,
+    wifi: true,
+    ssd: {
+        totalCapacity: 1024,
+        nvme: true,
+    },
+    monitor: ['Samsung 37inch', 'Mi Monitor 24inch']
+}
+
+console.log(computer.ssd.nvme)
+console.log(computer.monitor[1])
+
+const motor = [
+    {
+        nama: 'Mio',
+        cc : 110,
+        bensin: 'premium',
+        pajakHidup: true
+    },
+    {
+        nama: 'Beat',
+        cc : 110,
+        bensin: 'pertalite',
+        pajakHidup: true
+    },
+    {
+        nama: 'CB',
+        cc : 150,
+        bensin: 'premium',
+        pajakHidup: false
+    }
+]
+
+console.log(motor[1].nama)

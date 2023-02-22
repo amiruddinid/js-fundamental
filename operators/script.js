@@ -1,6 +1,6 @@
 // Basic operator / arimatika / matematika
 // Terms
-// Operan : adalah objek operasi matematika, yaitu objek atau kuantitas yang dioperasikan.
+// Operan : adalah objek operasi matematika / object dari sebuah operasi, yaitu objek atau kuantitas yang dioperasikan.
 // biasanya orang2 menyebut arguments daripada operan
 let sembilan = 3 + 6
 // 3 dan 6 adalah operan
@@ -60,3 +60,89 @@ console.log( inc ); // 3
 let dec = 2;
 dec--; // bekerja sama dengan dec = dec - 1, tapi lebih singkat
 console.log( dec ); // 1
+
+//Logical operator
+// operator yang menentukan operan mana yang akan menjadi hasil 
+// dari operasi tersebut.
+
+//truthy : hasil / nilai yang bernilai true / benar
+//falsy : hasil / nilai yang bernilai false / salah
+
+// AND (&&)
+// akan menghasilkan nilai truthy kalau operan sama2 truthy
+console.log(1 && 10); // 10
+console.log(0 && 100); // 0
+
+// OR (||) operan1 || operan2
+// akan bernilai / menampilkan operan1 kalau operan 1 truthy
+// akan bernilai operan2 kalau operan1 falsy
+console.log(1 || 10); // 1
+console.log(0 || 100); // 100
+
+// NOT (!) !operan
+// menegasikan atau mengubah sebuah nilai ke nilai kebalikanya
+// truthy jadi falsy dan falsy menjadi truthy
+console.log(!1)
+console.log(!0)
+
+console.log(!0 && 10 < 1 || "ahhh")
+
+// Relational operator
+// operator yang digunakan untuk melakukan komparasi terhadap operan-operannya
+
+// in
+// operasi untuk mengecek apakah ada object (key) di dalam sebuah 
+// variable yang bersifat koleksi (Array atau Object)
+
+const fruits = ["Alpukat", 'Buah Naga', 'Apel'];
+
+const favorite = 0 in fruits;
+console.log(favorite)
+
+// instanceof
+// mengecek apakah suatu data merupakan instansi dari tipe data tertentu.
+const date = new Date() // hari ini
+console.log(date instanceof Date); // true
+
+
+//Unary Operator
+// delete
+// menghapus sebuah atribut dari object
+const person = {
+    name: "sabrina",
+    age: 17
+}
+
+delete person.age
+
+// typeof
+// digunakan untuk mencari tau tipe data dari sebuah variabel atau literal.
+console.log(typeof person, typeof fruits, typeof plus) // object, object, number
+
+// Conditional operator (operan1 ? operan2 : operan3)
+// operator yang membutuhkan 3 operan. Dimana operan paling kiri akan menjadi 
+// penentu operan mana yang akan menjadi hasil dari ekspresi atau operasi tersebut. 
+
+console.log(1 > 10 ? "OK" : "MEH!") // 'MEH!'
+console.log(100 > 10 ? "OK" : "MEH!")// 'OK'
+
+const isRaining = true;
+const thingsToBring = isRaining ? "Payung" : "Sun Screen";
+
+console.log(isRaining, thingsToBring)
+
+// if(isRaining){
+//     console.log("Payung")
+// }else{
+//     console.log("Sun Screen")
+// }
+
+let things
+
+if(isRaining){
+    things = "Payung"
+}else{
+    things = "Sun Screen"
+}
+
+console.log(things)
