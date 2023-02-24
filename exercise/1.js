@@ -8,5 +8,5 @@ function ATM(x,y){
     return 'Saldo Kurang'
 }
 
-console.log(solution(20, 100))
-console.log(solution(42, 100))
+console.log(ATM(20, 100))
+console.log(ATM(42, 100))
