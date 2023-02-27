@@ -36,6 +36,17 @@ const isEvenOdd = (number) => {
     }
 }
 
+// or
+
+// const isEvenOdd = (name) => number % 2 === 0 ? `itu genap` : `itu ganjil`
+
 isEvenOdd(x)
 isEvenOdd(y)
 isEvenOdd(z)
+
+const sayHi = (name) => `Hai ${name.toLowerCase()}`
+// or
+// const sayHi = (name) => {
+//    console.log(name)
+//    return `Hai ${name.toLowerCase()}`
+// }
