@@ -16,6 +16,17 @@ class Person{
     }
 }
 
+class Programmer extends Person{
+    constructor(name, address, programmingLanguage){
+        super(name, address)
+        this.programmingLanguage = programmingLanguage
+    }
+
+    introduce(){
+        return super.introduce() + ", I can use " + this.programmingLanguage
+    }
+}
+
 console.log('isLivingOn', Person.isLivingOn)
 
 // object literal
@@ -39,3 +50,25 @@ const a = new Person('Agus', 'Malang')
 const b = new Person('Paijo', 'Semarang')
 
 console.log(a, b, personA.introduce())
+
+const c = new Programmer("Mari", "Bali", "Java")
+
+console.log(c.introduce());
+
+//soal
+
+const persegi = {
+    sisi: 4,
+    keliling: function(){
+        return this.sisi * 4
+    },
+    luas: function(){
+        return 'luas'
+    }
+}
+
+const kubus = {
+    volume: function(){
+        return 'volume'
+    }
+}

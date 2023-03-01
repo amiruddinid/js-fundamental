@@ -50,3 +50,6 @@ const sayHi = (name) => `Hai ${name.toLowerCase()}`
 //    console.log(name)
 //    return `Hai ${name.toLowerCase()}`
 // }
+
+//
+console.log()
