@@ -22,8 +22,16 @@ class Programmer extends Person{
         this.programmingLanguage = programmingLanguage
     }
 
-    introduce(){
-        return super.introduce() + ", I can use " + this.programmingLanguage
+    //overiding
+    // introduce(){
+    //     return super.introduce() + ", I can use " + this.programmingLanguage
+    // }
+    //overloading
+    introduce(year){
+        return super.introduce() + ", I can use " + this.programmingLanguage + " for " + year + " year"
+    }
+    code(){
+        return this.programmingLanguage[Math.floor(Math.random * this.programmingLanguage.length)]
     }
 }
 
@@ -53,9 +61,12 @@ console.log(a, b, personA.introduce())
 
 const c = new Programmer("Mari", "Bali", "Java")
 
-console.log(c.introduce());
+console.log(c.introduce(4));
 
 //soal
+// ganti object yang ada dibawah ini kebentuk class supaya bisa digunakan untuk menghitung lebih banyak persegi / kubus
+// 20:35 - 20:55 - 20 menit
+
 
 const persegi = {
     sisi: 4,
@@ -63,12 +74,13 @@ const persegi = {
         return this.sisi * 4
     },
     luas: function(){
-        return 'luas'
+        return 'luas' // ganti ke rumus luas
     }
 }
 
 const kubus = {
     volume: function(){
-        return 'volume'
+        return 'volume' // ganti ke rumus volume
     }
 }
+
