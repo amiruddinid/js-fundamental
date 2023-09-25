@@ -1,1 +1,0 @@
-Aku dibuat dari nodejs
