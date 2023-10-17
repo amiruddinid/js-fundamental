@@ -244,6 +244,14 @@ CREATE TABLE likes(
     REFERENCES posts(id)
 );
 
+#or
+
+CREATE TABLE likes(
+  id BIGSERIAL PRIMARY KEY,
+  user_id INT FOREIGN KEY REFERENCES users(id),
+  post_id INT FOREIGN KEY REFERENCES posts(id)
+);
+
 #menambahkan primary key pada table
 ALTER TABLE posts
  ADD CONSTRAINT pk_posts
