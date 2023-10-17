@@ -116,7 +116,7 @@ CREATE OR REPLACE PROCEDURE transfer(
    receiver INT, 
    amount DEC
 )
-LANGUAGE plpgsql    
+LANGUAGE sql    
 AS $$
 BEGIN
     -- subtracting the amount from the sender's account 
@@ -157,6 +157,118 @@ WITH richMan AS (
     SELECT name, balance
     FROM akun
     WHERE balance > 100000
-)
+);
 SELECT *
 FROM richMan;
+
+#PAGINATION
+# LIMIT = akan membatasi data yang muncul
+# OFFSET = akan menentukan dari mana kita mulai melakukan pengambilan data.
+
+SELECT * FROM <nama_table>
+LIMIT <limit> OFFSET <offset>;
+
+#SORTING
+# ORDER BY = akan mengurutkan data berdasarkan kolom 
+# ASC = mengurutkan data dari bawah ke atas
+# DESC = mengurutkan data dari atas ke bawah
+
+SELECT * FROM <nama_table>
+ORDER BY <nama_kolom> ASC / DESC
+LIMIT <limit> OFFSET <offset>;
+
+#Total data
+# Count(*) = menghitung jumlah data / baris dalam table
+SELECT count(*) from <nama_table>
+
+# Tugas
+1. Coba tambahkan 20 data ke table yang temen2 punya
+
+## SELECT GROUP BY PAGINATION
+## GROUP BY = query untuk melakukan grouping pada data
+
+SELECT nama, SUM(saldo) 
+FROM akun 
+GROUP BY nama 
+ORDER BY nama ASC 
+LIMIT 10 OFFSET 0;
+
+## Menghitung data setelah group by
+WITH total AS( 
+    SELECT nama 
+    from akun 
+    group by nama 
+) 
+SELECT count(nama) from total;
+#OR
+SELECT count(nama) from ( 
+    SELECT nama 
+    from akun 
+    group by nama 
+);
+
+#Indexing untuk performa db
+select * from akun where nama = 'Aaren';
+#membuat index
+CREATE INDEX <nama_index> ON <nama_table> (<nama_kolom>);
+#menghapus index
+DROP INDEX idx_akun_nama;
+
+#Mendefinisikan foreign key di schema table
+#saat table sudah ada atau selesai dibuat
+
+#ALTER
+ALTER TABLE <nama_table>
+ ADD CONSTRAINT fk_<nama_table>_<nama_table_referensi>
+ FOREIGN KEY(<nama_kolom_foreign_key>)
+ REFERENCES <nama_table_referensi>(<nama_kolom>)
+
+Contoh : 
+ALTER TABLE posts
+ ADD CONSTRAINT fk_posts_users
+ FOREIGN KEY(user_id)
+ REFERENCES users(id);
+
+#ketika membuat table
+
+contoh:
+CREATE TABLE likes(
+  id BIGSERIAL PRIMARY KEY,
+  user_id INT,
+  post_id INT,
+  CONSTRAINT fk_likes_users 
+    FOREIGN KEY(user_id) 
+    REFERENCES users(id),
+  CONSTRAINT fk_likes_posts 
+    FOREIGN KEY(post_id) 
+    REFERENCES posts(id)
+);
+
+#menambahkan primary key pada table
+ALTER TABLE posts
+ ADD CONSTRAINT pk_posts
+ PRIMARY KEY(id)
+
+ALTER TABLE comments
+ ADD CONSTRAINT pk_comments
+ PRIMARY KEY(id),
+ ADD CONSTRAINT fk_comments_users
+ FOREIGN KEY(user_id)
+ REFERENCES users(id),
+ ADD CONSTRAINT fk_comments_posts
+ FOREIGN KEY(post_id)
+ REFERENCES posts(id);
+
+# RELATION
+# untuk mengabungkan dua table kita bisa mengunakan JOIN
+
+# contoh:
+SELECT posts.title, users.name FROM posts
+JOIN users ON posts.user_id = users.id;
+
+SELECT count(posts.title) as jumlah_post, users.name FROM posts
+JOIN users ON posts.user_id = users.id
+WHERE posts.status = 'publish'
+GROUP BY users.name;
+
+SOAL : tuliskan query untuk menampilkan users yang belum pernah post
