@@ -1,0 +1,23 @@
+# init project
+npm init -y
+pnpm init
+yarn init
+
+# install modules / library
+npm i nama_modules
+pnpm i nama_modules
+yarn add nama_modules
+
+# install modules untuk development saja
+npm i --save-dev nama_modules / npm i -D nodemon
+pnpm i -D nama_module
+
+# uninstall modules / library
+npm uninstall nama_modules
+pnpm uninstall nama_modules
+yarn remove nama_modules
+
+# menjalankan script
+npm run nama_script
+pnpm nama_script / pnpm run nama_script
+yarn nama_script
