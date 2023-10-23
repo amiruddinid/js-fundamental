@@ -3,6 +3,11 @@ npm init -y
 pnpm init
 yarn init
 
+# install modules yang tertera di package.json
+npm i
+pnpm i
+yarn
+
 # install modules / library
 npm i nama_modules
 pnpm i nama_modules

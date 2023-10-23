@@ -1,11 +1,21 @@
-const os = require('os');
-// require untuk import
-// import from harus menggunakan esm
-const luasSegitiga = require('./segitiga')
+const express = require('express')
+const app = express()
+const port = 3000
+const routers = require('./router')
 
-// babeljs untuk compile ecma script modern
-// import os from 'os';
-// import luasSegitiga from '../segitiga';
+//perlu ditambahkan sesuatu untuk bisa 
+//menambahkan data
+app.use(express.json())
 
-console.log("Free Memory", os.freemem())
-console.log(luasSegitiga(4, 2));
+app.use(routers);
+
+app.listen(port, () => 
+    console
+      .log(`Server run at http://localhost:${port}
+    `))
+
+
+// Buatlah 2 endpoint untuk users untuk 
+// menambahkan data dan menghapus data
+// dengan method dan endpoint yang sesuai
+// waktu 20 menit
