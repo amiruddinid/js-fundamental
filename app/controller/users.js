@@ -1,38 +1,32 @@
-const users = [
-    {
-        id: 1,
-        name: 'Bambang S'
-    },
-    {
-        id: 2,
-        name: 'Cho Miyeon'
-    }
-]
+const model = require('../model/users')
 
 module.exports = {
-    get(req, res){
-        let result = users;
-        if(!users.length) res.status(200).json({ 
-            status: 'success', 
-            code: 200, 
-            message: 'Data Empty'
-        })
-
-        const { search } = req.query;
+    async get(req, res){
+        const { search, page, limit } = req.query;
+        console.log(req.query);
+        let result = await model.get(search, page, limit)
+        if(!result.length) {
+            return res.status(200).json({ 
+                status: 'success', 
+                code: 200, 
+                message: 'Data Empty'
+            })
+        }
 
         if(search){
-            result = users.filter((el) => {
+            result = result.filter((el) => {
                 return el.name.toLowerCase().includes(search)
             })
         }
 
-        res.status(200).json({ 
+        return res.status(200).json({ 
             status: 'success', 
             code: 200, 
             message: 'Success!',
             data: result
         })
     },
+
     getById(req, res){
         if(!req.params.id) res.status(400).json({ 
             status: 'fail', 
