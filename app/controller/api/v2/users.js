@@ -1,4 +1,6 @@
-const model = require('../model/users')
+const { PrismaClient } = require('@prisma/client')
+
+const prisma = new PrismaClient();
 
 module.exports = {
     async get(req, res){
@@ -37,8 +39,13 @@ module.exports = {
             data: user
         })
     },
+
     async create(req, res){
-        const user = await model.create(req.body);
+        const user = await prisma.user.create({
+            data: req.body
+        });
+
+        console.log(user)
 
         res.status(201).json({ 
             status: 'success', 
@@ -67,12 +74,12 @@ module.exports = {
             message: 'Bad Request! id is required',
         })
     
-        const user = await model.delete(req.params.id)
+        const user = await model.destroy(req.params.id)
     
         res.status(200).json({ 
             status: 'success', 
             code: 200, 
             message: 'Success Data terhapus!',
         })
-    },
+    }
 }
