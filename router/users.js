@@ -11,6 +11,7 @@ const controller = require('../app/controller')
 
 router.get('/users', controller.users.get)
 router.get('/users/:id', controller.users.getById)
+router.put('/users/:id', controller.users.update)
 router.post('/users', controller.users.create)
 router.delete('/users/:id', controller.users.destroy)
 

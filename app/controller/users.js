@@ -12,13 +12,7 @@ module.exports = {
                 message: 'Data Empty'
             })
         }
-
-        if(search){
-            result = result.filter((el) => {
-                return el.name.toLowerCase().includes(search)
-            })
-        }
-
+        
         return res.status(200).json({ 
             status: 'success', 
             code: 200, 
@@ -27,15 +21,14 @@ module.exports = {
         })
     },
 
-    getById(req, res){
+    async getById(req, res){
         if(!req.params.id) res.status(400).json({ 
             status: 'fail', 
             code: 400, 
             message: 'Bad Request! id is required',
         })
     
-        const user = users.find((el) => el.id ===
-            +req.params.id)
+        const user = await model.getById(req.params.id)
     
         res.status(200).json({ 
             status: 'success', 
@@ -44,41 +37,41 @@ module.exports = {
             data: user
         })
     },
-    create(req, res){
-        const { name } = req.body;
-        const newUser = {
-            id: users[users.length - 1].id + 1,
-            name: name
-        }
-
-        users.push(newUser)
-        console.log(users);
+    async create(req, res){
+        const user = await model.create(req.body);
 
         res.status(201).json({ 
             status: 'success', 
             code: 200, 
             message: 'Data ditambahkan!',
-            data: newUser
+            data: user
         })
     },
-    update(){
+    async update(req, res){
+        const user = await model.update({
+            ...req.body, 
+            id:req.params.id
+        });
 
+        res.status(201).json({ 
+            status: 'success', 
+            code: 200, 
+            message: 'Data diupdate!',
+            data: user
+        })
     },
-    destroy(req, res){
+    async destroy(req, res){
         if(!req.params.id) res.status(400).json({ 
             status: 'fail', 
             code: 400, 
             message: 'Bad Request! id is required',
         })
     
-        const userIndex = users.findIndex((el) => el.id ===
-            +req.params.id)
+        const user = await model.delete(req.params.id)
     
-        users.splice(userIndex, 1);
-    
-        res.status(204).json({ 
+        res.status(200).json({ 
             status: 'success', 
-            code: 204, 
+            code: 200, 
             message: 'Success Data terhapus!',
         })
     },
