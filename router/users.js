@@ -20,4 +20,6 @@ router.put('/v2/users/:id', controller.usersV2.update)
 router.post('/v2/users', controller.usersV2.create)
 router.delete('/v2/users/:id', controller.usersV2.destroy)
 
+router.post('/v2/transfer', controller.transactionV2.transfer)
+
 module.exports = router;

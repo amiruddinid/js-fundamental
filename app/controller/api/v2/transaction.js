@@ -4,12 +4,9 @@ const prisma = new PrismaClient();
 
 module.exports = {
     async get(req, res){
-        const { search, page = 1, limit = 10 } = req.query;
+        const { search, page, limit } = req.query;
         console.log(req.query);
-        let result = await prisma.user.findMany({
-            skip: (page - 1) * limit,
-            take: limit,
-        })
+        let result = await model.get(search, page, limit)
         if(!result.length) {
             return res.status(200).json({ 
                 status: 'success', 
@@ -33,9 +30,7 @@ module.exports = {
             message: 'Bad Request! id is required',
         })
     
-        const user = await prisma.user.findUnique({
-            where: { id: Number(req.params.id) }
-        })
+        const user = await model.getById(req.params.id)
     
         res.status(200).json({ 
             status: 'success', 
@@ -45,12 +40,10 @@ module.exports = {
         })
     },
 
-    async create(req, res){
-        const user = await prisma.user.create({
+    async transfer(req, res){
+        const user = await prisma.transaction.create({
             data: req.body
         });
-
-        console.log(user)
 
         res.status(201).json({ 
             status: 'success', 

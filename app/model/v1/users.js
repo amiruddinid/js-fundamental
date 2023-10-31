@@ -1,4 +1,4 @@
-const pool = require('../../config/db');
+const pool = require('../../../config/db');
 
 module.exports = {
     async get(search = null, page = 1, limit = 10){
