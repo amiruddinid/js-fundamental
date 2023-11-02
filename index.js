@@ -17,6 +17,7 @@ app.listen(port, () =>
       .log(`Server run at http://localhost:${port}
     `))
 
+module.exports = app
 
 // Buatlah 2 endpoint untuk users untuk 
 // menambahkan data dan menghapus data
