@@ -18,7 +18,4 @@ async function checkPassword(password, encryptedPassword){
     }
 }
 
-module.exports = {
-    encryptPassword,
-    checkPassword
-}
+module.exports = { encryptPassword, checkPassword }

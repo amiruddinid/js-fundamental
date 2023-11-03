@@ -14,12 +14,10 @@ router.put('/users/:id', controller.users.update)
 router.post('/users', controller.users.create)
 router.delete('/users/:id', controller.users.destroy)
 
-router.get('/v2/users', controller.usersV2.get)
-router.get('/v2/users/:id', controller.usersV2.getById)
-router.put('/v2/users/:id', controller.usersV2.update)
-router.post('/v2/users', controller.usersV2.create)
-router.delete('/v2/users/:id', controller.usersV2.destroy)
-
-router.post('/v2/transfer', controller.transactionV2.transfer)
+router.get('/api/v2/users', controller.usersV2.get)
+router.get('/api/v2/users/:id', controller.usersV2.getById)
+router.put('/api/v2/users/:id', controller.usersV2.update)
+router.post('/api/v2/users', controller.usersV2.create)
+router.delete('/api/v2/users/:id', controller.usersV2.destroy)
 
 module.exports = router;

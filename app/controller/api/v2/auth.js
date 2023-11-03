@@ -15,7 +15,7 @@ module.exports = {
         if(!user){
             return res.status(404).json({
                 status: "Fail!",
-                message: "Email tidak ditemukan!"
+                message: "User tidak ditemukan!"
             })
         }
 
@@ -37,7 +37,58 @@ module.exports = {
         })
     },
     async register(req, res){
-        //coba buat fungsi register dengan menganti password 
-        //dari req.body dengan password yang sudah terinkripsi
+        const {email, password, name} = req.body;
+        const user = await prisma.user.findFirst({
+            where: { email }
+        })
+
+        if(user){
+            return res.status(404).json({
+                status: "Fail!",
+                message: "Email sudah terdaftar!"
+            })
+        }
+
+        const createUser = await prisma.user.create({
+            data: {
+                email,
+                name,
+                password: await encryptPassword(password)
+            }
+        });
+
+        return res.status(201).json({ 
+            status: 'success', 
+            code: 200, 
+            message: 'Berhasil Register',
+            data: createUser
+        })
+    },
+    registerForm: async (req, res, next) => {
+        try{
+            const {email, password, name} = req.body;
+            console.log(req.body);
+            const user = await prisma.user.findFirst({
+                where: { email }
+            })
+
+            if(user){
+                req.flash("error", "Email sudah terdaftar!")
+                return res.redirect('/register')
+            }
+
+            const createUser = await prisma.user.create({
+                data: {
+                    email,
+                    name,
+                    password: await encryptPassword(password)
+                }
+            });
+
+            req.flash("success", "Berhasil Register!")
+            return res.redirect('/login')
+        }catch(e){
+            next(e) // untuk mengirim error ke middleware dan ditampilkan di ejs
+        }
     }
 }
