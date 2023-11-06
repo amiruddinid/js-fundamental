@@ -7,6 +7,7 @@ const session = require("express-session")
 const routers = require('./router')
 const swaggerJSON = require('./openapi.json')
 const swaggerUI = require('swagger-ui-express')
+const passport = require('./utils/passport');
 
 //perlu ditambahkan sesuatu untuk bisa 
 //menambahkan data
@@ -18,6 +19,8 @@ app.use(session({ // config middleware session
   saveUninitialized: true,
 }))
 app.use(flash()) // register flash middleware ke express -> req.flash
+app.use(passport.initialize());
+app.use(passport.session())
 
 app.set("view engine", "ejs"); // register ejs sebagai view engine flash
 app.set("views", path.join(__dirname, './app/view')) // mengubah folder views ke 

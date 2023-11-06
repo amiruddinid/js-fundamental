@@ -46,8 +46,12 @@ module.exports = {
     },
 
     async create(req, res){
+        const createdBy = req.user
         const user = await prisma.user.create({
-            data: req.body
+            data: {
+                ...req.body,
+                createdBy: createdBy.name
+            }
         });
 
         console.log(user)
