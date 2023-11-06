@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { auth } = 
-require('../../../../utils/jwt')
+require('../utils/jwt')
 // const { get, getById, create, delete } = 
 //     require('../app/controller/users')
 const controller = require('../app/controller')
