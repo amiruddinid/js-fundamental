@@ -44,23 +44,23 @@ describe("users.get function", () => {
     })
 })
 
-// describe("users.create function", () => {
-//     test("res.json called with status 201", async () => {
-//         const req = mockRequest({
-//             name: "Umare",
-//             email: "umare@email.com",
-//             password: "1234"
-//         })
-//         const res = mockResponse()
-//         await base.create(req, res)
-//         expect(res.status).toBeCalledWith(201)
-//         expect(res.json).toBeCalledWith(
-//             expect.objectContaining({
-//                 status: 'success',
-//                 code: 200,
-//                 message: 'Data ditambahkan!',
-//                 data: expect.any(Object)
-//             })
-//         )
-//     })
-// })
+describe("users.create function", () => {
+    test("res.json called with status 201", async () => {
+        const req = mockRequest({
+            name: "Umare",
+            email: "umare@email.com",
+            password: "1234"
+        })
+        const res = mockResponse()
+        await base.create(req, res)
+        expect(res.status).toBeCalledWith(201)
+        expect(res.json).toBeCalledWith(
+            expect.objectContaining({
+                status: 'success',
+                code: 200,
+                message: 'Data ditambahkan!',
+                data: expect.any(Object)
+            })
+        )
+    })
+})
