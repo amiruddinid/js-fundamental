@@ -14,7 +14,8 @@ model User {
   id Int @id @default(autoincrement())
   email String @unique
   name String
-  password String
+  password String?
+  googleId String?
   profile Profile?
   bankAccount BankAccount[]
 }
