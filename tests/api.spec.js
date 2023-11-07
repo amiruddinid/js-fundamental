@@ -22,11 +22,10 @@ describe("POST /api/v2/users", () => {
         const res = await request(app)
             .post('/api/v2/users')
             .send({
-                name: "UserTest",
-                email: "usertest@email.com",
+                name: "UserTest1",
+                email: "usertest55@email.com",
                 password: "1234"
             })
-            .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoic2NoYXJ4ZXhvQGdtYWlsLmNvbSIsIm5hbWUiOiJBbWlydWRkaW4gSXJzeWFkIiwicGFzc3dvcmQiOm51bGwsImdvb2dsZUlkIjoiMTA5NDAwMzEzODM0NTYyMjA4NzMxIiwiaWF0IjoxNjk5MzY1MDU4LCJleHAiOjE2OTkzNjg2NTh9.iL2BHeesSnd1WhKbSwkOdcXN6cfN9CpWrnX1LR7OGew')
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
         expect(res.statusCode).toBe(201)

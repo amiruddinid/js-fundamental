@@ -46,15 +46,11 @@ module.exports = {
     },
 
     async create(req, res){
-        const createdBy = req.user
         const user = await prisma.user.create({
             data: {
                 ...req.body,
-                createdBy: createdBy.name
             }
         });
-
-        console.log(user)
 
         res.status(201).json({ 
             status: 'success', 

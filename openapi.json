@@ -10,13 +10,13 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3000/api/v2"
     }
   ],
   "tags": [
     {
-      "name": "articles",
-      "description": "Everything about your Articles"
+      "name": "auth",
+      "description": "Everything about your auth"
     },
     {
       "name": "comments",
@@ -28,14 +28,14 @@
     }
   ],
   "paths": {
-    "/articles": {
+    "/users": {
       "get": {
         "tags": [
-          "articles"
+          "users"
         ],
-        "summary": "Get Article lists",
-        "description": "Get Article Lists",
-        "operationId": "getArticles",
+        "summary": "Get users lists",
+        "description": "Get users Lists",
+        "operationId": "getUsers",
         "parameters": [
           {
             "name": "page",
@@ -68,31 +68,28 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Article"
+                    "$ref": "#/components/schemas/Users"
                   }
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
       },
       "post": {
         "tags": [
-          "articles"
+          "users"
         ],
-        "summary": "Add a new article to the blog",
-        "description": "Add a new article to the blog",
+        "summary": "Add a new users",
+        "description": "Add a new users",
         "operationId": "addArticle",
         "requestBody": {
-          "description": "Create a new article in the blog",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Article"
-              }
-            }
-          },
-          "required": true
+          "$ref": "#/components/requestBodies/Users"
         },
         "responses": {
           "200": {
@@ -100,7 +97,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Article"
+                  "$ref": "#/components/schemas/Users"
                 }
               }
             }
@@ -108,17 +105,90 @@
           "405": {
             "description": "Invalid input"
           }
-        }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get users by id",
+        "description": "Get users by id",
+        "operationId": "getUsersById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "userID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "login",
+        "description": "login",
+        "operationId": "login",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Login"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
-      "Article": {
-        "required": [
-          "title",
-          "content"
-        ],
+      "Users": {
         "type": "object",
         "properties": {
           "id": {
@@ -126,55 +196,94 @@
             "format": "int64",
             "example": 10
           },
-          "title": {
+          "name": {
             "type": "string",
             "example": "Hello World"
           },
-          "thumbnails": {
+          "password": {
             "type": "string",
-            "example": "https://example.com/uploads/hello.jpg"
+            "example": "wiqe19203sjadqjp123"
           },
-          "summary": {
+          "email": {
+            "type": "string",
+            "example": "user@mail.com"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "name": {
             "type": "string",
             "example": "Hello World"
           },
-          "content": {
+          "email": {
             "type": "string",
-            "description": "contents",
-            "example": "Lorem ipsum hello world"
+            "example": "user@mail.com"
+          },
+          "token": {
+            "type": "string",
+            "example": "1923810a0sedu1231.129309a7sd071923.1293u0as7d0as70213"
           }
         }
       }
     },
     "requestBodies": {
-      "Article": {
-        "description": "Pet object that needs to be added to the store",
+      "Users": {
+        "description": "User body",
         "content": {
           "application/json": {
             "schema": {
               "type": "object",
               "properties": {
-                "title": {
+                "name": {
                   "type": "string",
                   "example": "Hello World"
                 },
-                "thumbnails": {
+                "password": {
                   "type": "string",
-                  "example": "https://example.com/uploads/hello.jpg"
+                  "example": "wiqe19203sjadqjp123"
                 },
-                "summary": {
+                "email": {
                   "type": "string",
-                  "example": "Hello World"
-                },
-                "content": {
-                  "type": "string",
-                  "description": "contents",
-                  "example": "Lorem ipsum hello world"
+                  "example": "user@mail.com"
                 }
               }
             }
           }
         }
+      },
+      "Login": {
+        "description": "login body",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "user@mail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": 1234
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "authorization": {
+        "type": "apiKey",
+        "name": "authorization",
+        "in": "header"
       }
     }
   }

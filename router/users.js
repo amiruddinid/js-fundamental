@@ -19,7 +19,7 @@ router.delete('/users/:id', controller.users.destroy)
 router.get('/api/v2/users', controller.usersV2.get)
 router.get('/api/v2/users/:id', controller.usersV2.getById)
 router.put('/api/v2/users/:id', controller.usersV2.update)
-router.post('/api/v2/users', auth, controller.usersV2.create)
+router.post('/api/v2/users', controller.usersV2.create)
 router.delete('/api/v2/users/:id', controller.usersV2.destroy)
 
 module.exports = router;
