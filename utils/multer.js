@@ -32,4 +32,36 @@ module.exports = {
             next(err);
         }
     }),
+    video: multer({
+        storage: generateStorage('./public/files'),
+        fileFilter: (req, file, callback) => {
+            const allowedMimeType = ['video/mp4', 'video/x-msvideo', 'video/quicktime']
+
+            if(allowedMimeType.includes(file.mimetype)){
+                callback(null, true)
+            } else {
+                const err = new Error(`Only ${allowedMimeType.join(', ')} allowed to upload`)
+                callback(err, false)
+            }   
+        },
+        onError: (err, next) => {
+            next(err);
+        }
+    }),
+    document: multer({
+        storage: generateStorage('./public/files'),
+        fileFilter: (req, file, callback) => {
+            const allowedMimeType = ['application/pdf', 'application/vnd.ms-excel']
+
+            if(allowedMimeType.includes(file.mimetype)){
+                callback(null, true)
+            } else {
+                const err = new Error(`Only ${allowedMimeType.join(', ')} allowed to upload`)
+                callback(err, false)
+            }   
+        },
+        onError: (err, next) => {
+            next(err);
+        }
+    }),
 }
